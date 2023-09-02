@@ -169,11 +169,9 @@ WAGTAILSEARCH_BACKENDS = {
 # e.g. in notification emails. Don't include '/admin' or a trailing slash
 WAGTAILADMIN_BASE_URL = "http://example.com"
 
-if DEBUG == True:
+# SECURITY WARNING: keep the secret key used in production secret!
+SECRET_KEY = SECRET_KEY = os.environ.get('SECRET_KEY', 'django-insecure-*kj$-rr#*yv#e$e1d$&6ujvd&cv%=k%c=4@q!8@7t8gcer7@@')
 
-    # SECURITY WARNING: keep the secret key used in production secret!
-    SECRET_KEY = "django-insecure-*kj$-rr#*yv#e$e1d$&6ujvd&cv%=k%c=4@q!8@7t8gcer7@@("
-
-    EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
+EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 
 ALLOWED_HOSTS = ['*',]
