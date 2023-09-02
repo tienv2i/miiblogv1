@@ -85,9 +85,13 @@ WSGI_APPLICATION = "miiblog.wsgi.application"
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
 DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": os.path.join(BASE_DIR, "db.sqlite3"),
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': os.environ.get('DB_NAME', 'miiblog'),
+        'USER': os.environ.get('DB_USER', 'postgres'),
+        'PASSWORD': os.environ.get('DB_PASSWORD', '1234'),
+        'HOST': os.environ.get('DB_HOST', 'localhost'),
+        'PORT': os.environ.get('DB_PORT', '5432'),
     }
 }
 
@@ -170,7 +174,6 @@ if DEBUG == True:
     # SECURITY WARNING: keep the secret key used in production secret!
     SECRET_KEY = "django-insecure-*kj$-rr#*yv#e$e1d$&6ujvd&cv%=k%c=4@q!8@7t8gcer7@@("
 
-    # SECURITY WARNING: define the correct hosts in production!
-    ALLOWED_HOSTS = ["*"]
-
     EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
+
+ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', 'localhost').split(',')
