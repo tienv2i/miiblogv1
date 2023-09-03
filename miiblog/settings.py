@@ -170,8 +170,8 @@ WAGTAILSEARCH_BACKENDS = {
 WAGTAILADMIN_BASE_URL = "http://example.com"
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = SECRET_KEY = os.environ.get('SECRET_KEY', 'django-insecure-*kj$-rr#*yv#e$e1d$&6ujvd&cv%=k%c=4@q!8@7t8gcer7@@')
+SECRET_KEY = os.environ.get('SECRET_KEY', 'django-insecure-*kj$-rr#*yv#e$e1d$&6ujvd&cv%=k%c=4@q!8@7t8gcer7@@')
 
 EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 
-ALLOWED_HOSTS = ['*',]
+ALLOWED_HOSTS = ['*']
