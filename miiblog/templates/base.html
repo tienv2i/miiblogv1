@@ -1,46 +1,87 @@
 {% load static wagtailcore_tags wagtailuserbar %}
+{% load render_bundle from webpack_loader %}
 
 <!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="utf-8" />
-        <title>
-            {% block title %}
-            {% if page.seo_title %}{{ page.seo_title }}{% else %}{{ page.title }}{% endif %}
-            {% endblock %}
-            {% block title_suffix %}
-            {% wagtail_site as current_site %}
-            {% if current_site and current_site.site_name %}- {{ current_site.site_name }}{% endif %}
-            {% endblock %}
-        </title>
-        {% if page.search_description %}
-        <meta name="description" content="{{ page.search_description }}" />
-        {% endif %}
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
+<html>
+<head>
+    <meta charset="utf-8" />
 
-        {# Force all links in the live preview panel to be opened in a new tab #}
-        {% if request.in_preview_panel %}
-        <base target="_blank">
-        {% endif %}
-
-        {# Global stylesheets #}
-        <link rel="stylesheet" type="text/css" href="{% static 'css/miiblog.css' %}">
-
-        {% block extra_css %}
-        {# Override this in templates to add extra stylesheets #}
+    {% block meta_tag %}
+      <title>
+        {% block title %}
+          {% if self.seo_title %}{{ self.seo_title }}{% else %}{{ self.title }}{% endif %}
         {% endblock %}
-    </head>
+        {% block title_suffix %}
+          {% with self.get_site.site_name as site_name %}
+            {% if site_name %}- {{ site_name }}{% endif %}
+          {% endwith %}
+        {% endblock %}
+      </title>
+      <meta name="description" content="{{ page.search_description }}" />
+    {% endblock %}
 
-    <body class="{% block body_class %}{% endblock %}">
-        {% wagtailuserbar %}
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    
+    {% render_bundle 'main' 'css'%}
 
+    {% block extra_css %}
+    {# Override this in templates to add extra stylesheets #}
+    {% endblock %}
+</head>
+<body>
+    {% wagtailuserbar %}
+    <div class="container">
+        <header class="border-bottom lh-1 py-3">
+            <div class="row flex-nowrap justify-content-between align-items-center">
+              <div class="col-4 pt-1">
+                <a class="link-secondary" href="#">Subscribe</a>
+              </div>
+              <div class="col-4 text-center">
+                <a class="blog-header-logo text-body-emphasis text-decoration-none" href="#">Large</a>
+              </div>
+              <div class="col-4 d-flex justify-content-end align-items-center">
+                <a class="link-secondary" href="#" aria-label="Search">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="mx-3" role="img" viewBox="0 0 24 24"><title>Search</title><circle cx="10.5" cy="10.5" r="7.5"/><path d="M21 21l-5.2-5.2"/></svg>
+                </a>
+                <a class="btn btn-sm btn-outline-secondary" href="#">Sign up</a>
+              </div>
+            </div>
+          </header>
+
+          <div class="nav-scroller py-1 mb-3 border-bottom">
+            <nav class="nav nav-underline justify-content-between">
+              <a class="nav-item nav-link link-body-emphasis active" href="#">World</a>
+              <a class="nav-item nav-link link-body-emphasis" href="#">U.S.</a>
+              <a class="nav-item nav-link link-body-emphasis" href="#">Technology</a>
+              <a class="nav-item nav-link link-body-emphasis" href="#">Design</a>
+              <a class="nav-item nav-link link-body-emphasis" href="#">Culture</a>
+              <a class="nav-item nav-link link-body-emphasis" href="#">Business</a>
+              <a class="nav-item nav-link link-body-emphasis" href="#">Politics</a>
+              <a class="nav-item nav-link link-body-emphasis" href="#">Opinion</a>
+              <a class="nav-item nav-link link-body-emphasis" href="#">Science</a>
+              <a class="nav-item nav-link link-body-emphasis" href="#">Health</a>
+              <a class="nav-item nav-link link-body-emphasis" href="#">Style</a>
+              <a class="nav-item nav-link link-body-emphasis" href="#">Travel</a>
+            </nav>
+          </div>
+    </div>
+
+    <main class="container">
+        <div class="p-4 p-md-5 mb-4 rounded text-body-emphasis bg-body-secondary">
+            <div class="col-lg-6 px-0">
+            <h1 class="display-4 fst-italic">Title of a longer featured blog post</h1>
+            <p class="lead my-3">Multiple lines of text that form the lede, informing new readers quickly and efficiently about what’s most interesting in this post’s contents.</p>
+            <p class="lead mb-0"><a href="#" class="text-body-emphasis fw-bold">Continue reading...</a></p>
+            </div>
+        </div>
         {% block content %}{% endblock %}
-
-        {# Global javascript #}
-        <script type="text/javascript" src="{% static 'js/miiblog.js' %}"></script>
-
-        {% block extra_js %}
-        {# Override this in templates to add extra javascript #}
-        {% endblock %}
-    </body>
+    </main>
+    <footer class="py-5 text-center text-body-secondary bg-body-tertiary">
+        <p>Blog template built for <a href="https://getbootstrap.com/">Bootstrap</a> by <a href="https://twitter.com/mdo">@mdo</a>.</p>
+        <p class="mb-0">
+          <a href="#">Back to top</a>
+        </p>
+    </footer>
+    {% render_bundle 'main' 'js'%}
+</body>
 </html>

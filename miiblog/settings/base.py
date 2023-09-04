@@ -36,6 +36,7 @@ INSTALLED_APPS = [
     "wagtail.images",
     "wagtail.search",
     "wagtail.admin",
+    "wagtail.contrib.routable_page",
     "wagtail",
     "modelcluster",
     "taggit",
@@ -45,6 +46,11 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "django.contrib.sitemaps",
+    "webpack_loader",
+    "wagtailmarkdown",
+    "wagtailmetadata",
+    "blog"
 ]
 
 MIDDLEWARE = [
@@ -145,6 +151,7 @@ STATICFILES_FINDERS = [
 ]
 
 STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, "frontend/dist"),
     os.path.join(PROJECT_DIR, "static"),
 ]
 
@@ -175,3 +182,10 @@ WAGTAILSEARCH_BACKENDS = {
 # Base URL to use when referring to full URLs within the Wagtail admin backend -
 # e.g. in notification emails. Don't include '/admin' or a trailing slash
 WAGTAILADMIN_BASE_URL = "http://example.com"
+
+WEBPACK_LOADER = {
+    'DEFAULT': {
+        'BUNDLE_DIR_NAME': 'frontend/dist/',  # Thay đổi đường dẫn nếu cần
+        'STATS_FILE': os.path.join(BASE_DIR, 'frontend/dist/webpack-stats.json'),
+    }
+}
