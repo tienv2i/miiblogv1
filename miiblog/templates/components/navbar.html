@@ -1,0 +1,27 @@
+<nav class="bg-gray-800 text-white">
+    <div class="container mx-auto p-4">
+        <div class="flex justify-between items-center">
+            <div class="logo text-2xl font-bold">Logo</div>
+            <div class="menu hidden md:flex space-x-4">
+                <ul class="flex">
+                    <li><a href="#">Trang chủ</a></li>
+                    <li class="group relative">
+                        <a href="#">Dịch vụ</a>
+                        <ul class="absolute hidden bg-gray-800 text-white mt-2 p-2 space-y-2 group-hover:block">
+                            <li><a href="#">Dịch vụ 1</a></li>
+                            <li><a href="#">Dịch vụ 2</a></li>
+                            <li><a href="#">Dịch vụ 3</a></li>
+                        </ul>
+                    </li>
+                    <!-- Các mục menu khác -->
+                </ul>
+            </div>
+            <!-- Nút burger cho phiên bản thu nhỏ -->
+            <div class="md:hidden">
+                <button id="menu-toggle" class="flex items-center px-3 py-2">
+                    <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+                </button>
+            </div>
+        </div>
+    </div>
+</nav>

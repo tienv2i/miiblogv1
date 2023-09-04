@@ -1,0 +1,22 @@
+{
+  "status": "done",
+  "assets": {
+    "bundle.js": {
+      "name": "bundle.js",
+      "path": "D:\\Projects\\miiblog\\frontend\\dist\\bundle.js",
+      "publicPath": "/static/bundle.js"
+    },
+    "style.css": {
+      "name": "style.css",
+      "path": "D:\\Projects\\miiblog\\frontend\\dist\\style.css",
+      "publicPath": "/static/style.css"
+    }
+  },
+  "chunks": {
+    "main": [
+      "style.css",
+      "bundle.js"
+    ]
+  },
+  "publicPath": "/static/"
+}
